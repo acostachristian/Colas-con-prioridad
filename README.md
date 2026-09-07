@@ -2,8 +2,9 @@
 
 PROBLEMA COLA CON PRIORIDAD
 
-En el aeropuerto de Ciudad Gótica, los aviones pueden aterrizar en sus pistas de acuerdo a la prioridad que maneje el vuelo. Los que tengan un número de prioridad más bajo se van atendiendo primero. Así si un vuelo tiene prioridad 0 será el primero en aterrizar, luego el que tenga prioridad inmediatamente superior y ocupe la posición mas cercana a la cabeza tendrá derecho a utilizar la pista. Al considerar la prioridad para entrar en la
-cola, la prioridad se compara con la posición que ocupa cada nodo (avión), de modo que la posición del nodo (avión) es la que demanda la prioridad. En el caso de que no existan suficientes vuelos para insertar en la posición que demanda la prioridad, el nuevo vuelo se insertara al final. Los vuelos con prioridad a 16 o superiores se atenderán según la prioridad default (16), es decir, que todo vuelo con prioridad igual o superior a 16 se insertaran en la cola inmediatamente después del que ocupe la última posición en la cola. 
+En el aeropuerto de Ciudad Gótica, los aviones pueden aterrizar en sus pistas de acuerdo a la prioridad que maneje el vuelo. Los que tengan un número de prioridad más bajo se van atendiendo primero. Así si un vuelo tiene prioridad 0 será el primero en aterrizar, luego el que tenga prioridad inmediatamente superior y ocupe la posición mas cercana a la cabeza tendrá derecho a utilizar la pista.
+
+Al considerar la prioridad para entrar en la cola, la prioridad se compara con la posición que ocupa cada nodo (avión), de modo que la posición del nodo (avión) es la que demanda la prioridad. En el caso de que no existan suficientes vuelos para insertar en la posición que demanda la prioridad, el nuevo vuelo se insertara al final. Los vuelos con prioridad a 16 o superiores se atenderán según la prioridad default (16), es decir, que todo vuelo con prioridad igual o superior a 16 se insertaran en la cola inmediatamente después del que ocupe la última posición en la cola. 
 
 Utilizando la siguiente estructura para el nodo
 struct Nodo {
