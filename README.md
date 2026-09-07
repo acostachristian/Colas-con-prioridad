@@ -17,6 +17,9 @@ RESTRICCIONES
 Haga un programa C++ que permita manejar la pista de aterrizaje del aeropuerto de Ciudad Gótica, sabiendo que, el programa debe insertar (encolar = Enqueue) los vuelos en la cola priorizada según se describió anteriormente.
 
 1- Tenga en consideración que un vuelo puede aparecer más de una vez en la cola. El programa debe permitir autorizar el aterrizaje del vuelo que esté en la cabeza de la cola priorizada al seleccionar Desencolar = Dequeue.
+
 2- En el caso de tratar de autorizar el aterrizaje cuando la cola no contenga vuelos, el programa debe notificar al usuario de que la cola esta vacía.
+
 3- De igual manera, el programa debe poder mostrar los vuelos según el orden en la cola realizando dequeue. En el caso de que no haya vuelos debe notificar que la cola esta vacía.
+
 4- El programa debe contener un menú donde se ofrezcan las opciones para realizar las operaciones además de la opción de salir del programa (Enqueue, Dequeue, Mostrar, Salir).
