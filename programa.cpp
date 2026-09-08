@@ -8,11 +8,19 @@ Grupo 1:
 - ⁠José Pinales - 1133255
 - Christian Acosta - 1132698
 
-Realizar un programa C++ que simule una Lista Enlazada Cola (Linked List).
+Haga un programa C++ que permita manejar la pista de aterrizaje del aeropuerto de
+Ciudad Gótica, sabiendo que, el programa debe insertar (encolar = Enqueue) los vuelos
+en la cola priorizada según se describió anteriormente..
 */
 
 #include <iostream>
 using namespace std;
+
+struct Nodo {
+int vuelo;
+int prioridad;
+Nodo *next;
+};
 
 int main()
 {
