@@ -70,7 +70,7 @@ void Enqueue(Nodo *&frente, Nodo *&fin, int pVuelo, int pPrioridad)
   // y nodoActual sera el que va siguiente a nuevoNodo
   else if (pPrioridad <= cantidadNodos)
   {
-    for (int i = 0; i < (pPrioridad - 1); i++)
+    for (int i = 0; i < (pPrioridad); i++)
     {
       nodoAnterior = nodoActual;
       nodoActual = nodoActual->next;
