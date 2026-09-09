@@ -100,6 +100,36 @@ void Enqueue(Nodo *&frente, Nodo *&fin, int pVuelo, int pPrioridad)
   }
 }
 
+void Dequeue(Nodo*& frente, Nodo*& fin)
+{ 
+  // Si frente es NULL, significa que no hay ningun nodo enlazado, es decir,
+  // no hay vuelos esperando para aterrizar.
+    if (frente == NULL)
+    {
+        cout << "La cola esta vacia. No hay vuelos en espera para aterrizar." << endl;
+        return;
+    }
+
+    // Antes de mover frente hacia el siguiente nodo, guardamos su direccion
+    // actual en nodoAEliminar. 
+    Nodo* nodoAEliminar = frente;
+
+    cout << "Autorizando aterrizaje del vuelo " << frente->vuelo
+        << " (prioridad " << frente->prioridad << ")." << endl;
+
+    // El frente de la cola avanza al siguiente nodo.
+    frente = frente->next;
+
+    // Si al avanzar frente este quedo en NULL, significa que el nodo que
+    // acabamos de sacar era el unico que quedaba en la cola. 
+    if (frente == NULL)
+    {
+        fin = NULL;
+    }
+
+    delete nodoAEliminar;
+}
+
 int main()
 {
   return 0;
