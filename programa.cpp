@@ -130,7 +130,211 @@ void Dequeue(Nodo*& frente, Nodo*& fin)
     delete nodoAEliminar;
 }
 
+void Mostrar(Nodo *frente)
+{
+    if (frente == NULL)
+    {
+        cout << "La cola esta vacia. No hay vuelos en espera." << endl;
+        return;
+    }
+
+    cout << "\n=== Vuelos en espera de aterrizaje ===" << endl;
+    cout << "Posicion | Vuelo | Prioridad" << endl;
+    cout << "---------|-------|----------" << endl;
+
+    Nodo *actual = frente;
+    int posicion = 1;
+
+    while (actual != NULL)
+    {
+        cout << posicion << "        | " << actual->vuelo << "     | " << actual->prioridad << endl;
+        actual = actual->next;
+        posicion++;
+    }
+    cout << "\nTotal de vuelos en espera: " << (posicion - 1) << endl;
+}
+
+void LimpiarPantalla()
+{
+    cout << "\n";
+    cout << "Presione ENTER para continuar...";
+    cin.ignore();
+    cin.get();
+    cout << "\033[2J\033[1;1H"; // Limpia la pantalla (funciona en Linux/Mac)
+}
+
+// Función para validar entrada entera
+int ObtenerEnteroValido(const string& mensaje)
+{
+    int valor;
+    string entrada;
+    bool valido = false;
+
+    while (!valido)
+    {
+        cout << mensaje;
+        cin >> entrada;
+
+        // Limpiar el buffer de entrada en caso de que haya caracteres extra
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(10000, '\n');
+        }
+
+        // Validar que la entrada sea un número entero válido
+        valido = true;
+        for (int i = 0; i < entrada.length(); i++)
+        {
+            // Permitir signo negativo al inicio
+            if (i == 0 && entrada[i] == '-')
+            {
+                continue;
+            }
+            // El resto deben ser dígitos
+            if (!isdigit(entrada[i]))
+            {
+                valido = false;
+                break;
+            }
+        }
+
+        if (!valido)
+        {
+            cout << "ERROR: Entrada no valida. Por favor, ingrese un numero entero valido." << endl;
+            continue;
+        }
+
+        // Convertir la entrada validada a entero
+        valor = stoi(entrada);
+        break;
+    }
+
+    return valor;
+}
+
+// Función para validar la opción del menú
+int ObtenerOpcionValida()
+{
+    int opcion;
+    string entrada;
+    bool valido = false;
+
+    while (!valido)
+    {
+        cout << "Seleccione una opcion (1-4): ";
+        cin >> entrada;
+
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(10000, '\n');
+        }
+
+        valido = true;
+        for (int i = 0; i < entrada.length(); i++)
+        {
+            if (!isdigit(entrada[i]))
+            {
+                valido = false;
+                break;
+            }
+        }
+
+        if (!valido)
+        {
+            cout << "ERROR: Entrada no valida. Por favor, ingrese un numero entre 1 y 4." << endl;
+            continue;
+        }
+
+        opcion = stoi(entrada);
+
+        if (opcion < 1 || opcion > 4)
+        {
+            cout << "ERROR: Opcion fuera de rango. Por favor, ingrese un numero entre 1 y 4." << endl;
+            valido = false;
+            continue;
+        }
+
+        break;
+    }
+
+    return opcion;
+}
 int main()
 {
-  return 0;
+  bool continuar = true;
+    Nodo* frente = NULL;
+    Nodo* fin = NULL;
+    
+    while (continuar)
+    {
+        cout << "\n========================================" << endl;
+        cout << "Sistema del Aeropuerto de Ciudad Gotica" << endl;
+        cout << "========================================" << endl;
+        cout << "1. Agregar vuelo a la cola de aterrizaje (Enqueue)" << endl;
+        cout << "2. Autorizar aterrizaje del siguiente vuelo (Dequeue)" << endl;
+        cout << "3. Mostrar vuelos en espera" << endl;
+        cout << "4. Salir" << endl;
+        cout << "----------------------------------------" << endl;
+        
+        int opcion = ObtenerOpcionValida();
+        cout << "\n";
+        
+        switch (opcion)
+        {
+        case 1: // Lógica para agregar vuelo
+        {
+            int numeroVuelo, prioridad;
+            
+            numeroVuelo = ObtenerEnteroValido("Ingrese el numero del vuelo: ");
+            
+            // Validar que el número de vuelo sea positivo
+            if (numeroVuelo <= 0)
+            {
+                cout << "ERROR: El numero de vuelo debe ser un numero positivo." << endl;
+                LimpiarPantalla();
+                break;
+            }
+            
+            prioridad = ObtenerEnteroValido("Ingrese la prioridad del vuelo (0-16+): ");
+            
+            Enqueue(frente, fin, numeroVuelo, prioridad);
+            
+            if (prioridad > 16)
+            {
+                cout << "Vuelo " << numeroVuelo << " agregado a la cola con prioridad default (16)." << endl;
+            }
+            else if (prioridad < 0)
+            {
+                cout << "Vuelo " << numeroVuelo << " agregado a la cola con prioridad ajustada (0)." << endl;
+            }
+            else
+            {
+                cout << "Vuelo " << numeroVuelo << " agregado a la cola con prioridad " << prioridad << "." << endl;
+            }
+            
+            LimpiarPantalla();
+            break;
+        }
+        case 2: // Lógica para autorizar aterrizaje
+        {
+            Dequeue(frente, fin);
+            LimpiarPantalla();
+            break;
+        }
+        case 3: // Lógica para mostrar vuelos en espera
+        {
+            Mostrar(frente);
+            LimpiarPantalla();
+            break;
+        }
+        case 4:
+        {
+            cout << "Gracias por usar el sistema del Aeropuerto de Ciudad Gotica." << endl;
+            continuar = false;
+            break;
+        }
+        }
+    }
 }
